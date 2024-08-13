@@ -14,6 +14,9 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(
+    path.join(__dirname, '..', 'public'),
+));
 
 routingControllersUseContainer(Container);
 
@@ -32,7 +35,18 @@ useExpressServer(app, {
 })
 
 app.get('/', (req: Request, res: Response) => {
-    return res.status(200).send('Hello World');
+    return res.status(200).send('Welcome to itreact.eu');
+  });
+  
+  app.all("*", (req, res) => {
+    res.status(404);
+    if (req.accepts("html")) {
+      res.sendFile(path.join(__dirname, "..", "public", "404.html"));
+    } else if (req.accepts("json")) {
+      res.json({ error: "404 Not Found" });
+    } else {
+      res.type("txt").send("404 Not Found");
+    }
   });
 
 export default app;
