@@ -1,0 +1,10 @@
+model Profile {
+  id  String  @id @default(cuid())
+  firstName String?
+  lastName String?
+  address String?
+  phone String?
+  userId  String @unique
+  
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

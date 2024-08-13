@@ -51,6 +51,7 @@ export class AuthService {
       email: registerUserDto.email,
       username: registerUserDto.username,
       password: hashedPassword,
+      image: registerUserDto.image
     });
 
     return { message: 'User registered successfully' };

@@ -21,6 +21,8 @@ model User {
   password  String
   apiKey    String   @unique
   role      Role     @default(user)
+  image     String?
+  profile   Profile?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
